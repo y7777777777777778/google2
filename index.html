@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Google</title>
+  <link rel="icon" href="https://www.google.com/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      height: 100%;
+      overflow: hidden;
+      background-color: #fff;
+    }
+
+    header, footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      font-size: 14px;
+      background: #fff;
+      color: #202124;
+    }
+
+    .header-left a, .header-right a, .footer-left a, .footer-right a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #202124;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: calc(100vh - 120px);
+    }
+
+    .logo {
+      margin-bottom: 30px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .search-input-container {
+      display: flex;
+      align-items: center;
+      border: 1px solid #dfe1e5;
+      border-radius: 24px;
+      padding: 0 14px;
+      width: 560px;
+    }
+
+    .search-input-container input {
+      flex-grow: 1;
+      padding: 14px 10px;
+      font-size: 16px;
+      border: none;
+      outline: none;
+    }
+
+    .search-input-container img {
+      width: 24px;
+      height: 24px;
+      margin: 0 6px;
+      cursor: pointer;
+    }
+
+    .search-buttons {
+      margin-top: 20px;
+    }
+
+    .search-buttons button {
+      padding: 10px 16px;
+      margin: 5px;
+      font-size: 14px;
+      background-color: #f8f9fa;
+      border: 1px solid #f8f9fa;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .iframe-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: white;
+      flex-direction: column;
+      z-index: 999;
+    }
+
+    .iframe-toolbar {
+      display: none;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px;
+      background-color: #f1f1f1;
+    }
+
+    .iframe-toolbar.active {
+      display: flex;
+    }
+
+    .iframe-toolbar button {
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    iframe {
+      flex-grow: 1;
+      border: none;
+      width: 100%;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <a href="https://about.google/">Googleについて</a>
+      <a href="https://store.google.com/">ストア</a>
+    </div>
+    <div class="header-right">
+      <a href="https://mail.google.com/">Gmail</a>
+      <a href="https://www.google.co.jp/imghp">画像</a>
+      <a href="https://www.google.co.jp/preferences">設定</a>
+      <a href="https://accounts.google.com/ServiceLogin">ログイン</a>
+    </div>
+  </header>
+
+  <div class="main-content" id="mainContent">
+    <div class="logo">
+      <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
+    </div>
+    <div class="search-box">
+      <div class="search-input-container">
+        <input type="text" id="searchInput" placeholder="Google 検索または URL を入力" autocomplete="off">
+        <img src="https://www.gstatic.com/images/icons/material/system/1x/search_gm_blue_24dp.png" alt="検索" onclick="handleSearch()">
+        <img src="https://www.gstatic.com/images/icons/material/system/1x/mic_gm_blue_24dp.png" alt="音声" onclick="alert('音声入力は現在サポートされていません')">
+        <img src="https://bicsim.com/column/uploads/b15f197575365030f5e7ababc798ab95457b7d1e.png" alt="レンズ" onclick="alert('Googleレンズ機能は現在サポートされていません')">
+      </div>
+    </div>
+    <div class="search-buttons">
+      <button onclick="handleSearch()">Google 検索</button>
+      <button onclick="alert('準備中')">I'm Feeling Lucky</button>
+    </div>
+  </div>
+
+  <div class="iframe-container" id="iframeContainer">
+    <div class="iframe-toolbar" id="toolbar78">
+      <button onclick="loadSite('https://solar.bomberfish.ca/')">Solar OS</button>
+      <button onclick="loadSite('https://thickofit.moldeo.org/')">Interstellarプロキシ</button>
+      <button onclick="loadSite('https://offcha.com/room/dlKme6WVrCcoPyyoanrT')">避難用Chat</button>
+      <button onclick="loadSite('https://chat-u5k5.onrender.com/')">6年Chat</button>
+      <button onclick="loadSite('https://light.6nenn.patrickwrede.com/')">自作Interstellar</button>
+      <button onclick="loadSite('https://benkyou.ycare.org/')">自作shadowプロキシ</button>
+      <button onclick="goBack()">戻る</button>
+    </div>
+    <div class="iframe-toolbar" id="toolbar61">
+      <button onclick="loadSite('https://solar.bomberfish.ca/')">Solar OS</button>
+      <button onclick="loadSite('https://thickofit.moldeo.org/')">Interstellarプロキシ（広告多め）</button>
+      <button onclick="loadSite('https://thickofit.moldeo.org/')">Interstellarプロキシ</button>
+      <button onclick="loadSite('https://offcha.com/room/dlKme6WVrCcoPyyoanrT')">避難用Chat</button>
+      <button onclick="loadSite('https://chat-u5k5.onrender.com/')">6年Chat</button>
+      <button onclick="loadSite('https://light.6nenn.patrickwrede.com/')">自作Interstellarプロキシ（広告多め）</button>
+      <button onclick="loadSite('https://light.6nenn.patrickwrede.com/')">自作Interstellar</button>
+      <button onclick="loadSite('https://benkyou.ycare.org/')">自作shadowプロキシ</button>
+      <button onclick="loadSite('https://six1chat.onrender.com/')">6-1だけchat</button>
+      <button onclick="goBack()">戻る</button>
+    </div>
+    <iframe id="embeddedFrame" src=""></iframe>
+  </div>
+
+  <footer>
+    <div class="footer-left"><a href="#">日本</a></div>
+    <div class="footer-right">
+      <a href="https://ads.google.com/">広告</a>
+      <a href="https://smallbusiness.withgoogle.com/">ビジネス</a>
+      <a href="https://www.google.com/search/howsearchworks/">検索の仕組み</a>
+      <a href="https://policies.google.com/privacy">プライバシー</a>
+      <a href="https://policies.google.com/terms">規約</a>
+    </div>
+  </footer>
+
+  <script>
+    function handleSearch() {
+      const input = document.getElementById("searchInput");
+      const value = input.value.trim();
+      input.value = ""; // 検索バーをクリア
+
+      if (value === "roguinn78") {
+        openIframe("toolbar78", "https://solar.bomberfish.ca/");
+      } else if (value === "roguinn61") {
+        openIframe("toolbar61", "https://six1chat.onrender.com/");
+      } else {
+        window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(value);
+      }
+    }
+
+    function openIframe(toolbarId, defaultUrl) {
+      document.getElementById("mainContent").style.display = "none";
+      document.querySelector("header").style.display = "none";
+      document.querySelector("footer").style.display = "none";
+      document.getElementById("iframeContainer").style.display = "flex";
+      document.getElementById("toolbar78").classList.remove("active");
+      document.getElementById("toolbar61").classList.remove("active");
+      document.getElementById(toolbarId).classList.add("active");
+      document.getElementById("embeddedFrame").src = defaultUrl;
+    }
+
+    function loadSite(url) {
+      document.getElementById("embeddedFrame").src = url;
+    }
+
+    function goBack() {
+      document.getElementById("iframeContainer").style.display = "none";
+      document.getElementById("mainContent").style.display = "flex";
+      document.querySelector("header").style.display = "flex";
+      document.querySelector("footer").style.display = "flex";
+    }
+
+    // 危機察知機能
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        goBack();
+      }
+    });
+  </script>
+</body>
+</html>
