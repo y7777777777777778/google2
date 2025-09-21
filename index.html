@@ -1,53 +1,142 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>google</title>
+  <meta charset="UTF-8">
+  <title>Google</title>
   <link rel="icon" href="https://www.google.com/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
   <style>
-    :root{
-      --text:#202124; --muted:#5f6368; --bg:#fff;
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      height: 100%;
+      overflow: hidden;
+      background-color: #fff;
     }
-    html,body{margin:0;padding:0;height:100%;background:var(--bg);color:var(--text);font-family:Roboto, "Helvetica Neue", Arial, sans-serif;}
-    header{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid #eee;background:var(--bg);}
-    .header-left, .header-right{display:flex;align-items:center;}
-    .header-left a, .header-right a{margin:0 10px;color:var(--muted);text-decoration:none;font-size:14px;}
-    /* apps grid + login */
-    .apps-btn{width:36px;height:36px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;margin-right:8px}
-    .apps-grid{width:18px;height:18px;display:grid;grid-template-columns:repeat(3,4px);gap:3px}
-    .apps-grid span{width:4px;height:4px;background:#5f6368;display:block;border-radius:1px}
-    .login-btn{padding:6px 10px;border-radius:18px;border:1px solid transparent;background:#1a73e8;color:white;text-decoration:none;font-size:14px;margin-left:8px;}
-    /* AI pill */
-    .ai-pill{margin-left:12px;padding:6px 10px;border-radius:999px;border:1px solid #e8eaed;background:#f8f9fa;font-size:13px;cursor:pointer;color:var(--muted)}
-    main{min-height:calc(100vh - 120px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 10px;}
-    .logo img{width:272px;height:auto;margin-bottom:28px;}
-    /* search */
-    .search-wrapper{width:100%;max-width:640px;}
-    .search-box{position:relative;border-radius:24px;border:1px solid #dfe1e5;padding:8px 12px;display:flex;align-items:center;background:#fff;box-sizing:border-box;}
-    .search-box input{flex:1;border:none;outline:none;font-size:16px;padding:10px 12px 10px 44px;border-radius:20px;background:transparent;}
-    .icon-left{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:20px;height:20px;cursor:pointer}
-    .icon-right{position:absolute;right:12px;top:50%;transform:translateY(-50%);display:flex;gap:10px;align-items:center}
-    .icon-right img{width:22px;height:22px;cursor:pointer}
-    .search-buttons{margin-top:18px;display:flex;gap:10px;justify-content:center;}
-    .btn{padding:10px 16px;border-radius:4px;border:1px solid #dadce0;background:#f8f9fa;cursor:pointer;font-size:14px}
-    .btn.primary{background:#1a73e8;color:#fff;border-color:#1a73e8}
-    /* iframe hidden page */
-    .iframe-overlay{display:none;position:fixed;inset:0;background:#fff;z-index:9999;flex-direction:column}
-    .iframe-toolbar{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:#f1f3f4;justify-content:center}
-    .iframe-toolbar button{padding:8px 10px;border-radius:6px;border:1px solid #ddd;background:#fff;cursor:pointer}
-    .iframe-frame{flex:1;border:none;width:100%}
-    footer{position:fixed;bottom:0;left:0;right:0;background:#f2f2f2;padding:12px 24px;display:flex;justify-content:space-between;font-size:13px;}
-    footer a{color:var(--muted);text-decoration:none;margin:0 8px}
-    /* small dropdown for apps */
-    .apps-menu{position:absolute;top:46px;right:20px;display:none;background:#fff;border:1px solid #e0e0e0;padding:8px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
-    .apps-menu a{display:block;padding:6px 10px;color:var(--muted);text-decoration:none;border-radius:6px}
-    .apps-menu a:hover{background:#f6f6f6}
-    /* AI panel placeholder */
-    .ai-panel{display:none;border:1px solid #e8eaed;padding:10px;border-radius:8px;max-width:640px;margin-top:12px;background:#fff}
-    @media (max-width:640px){
-      .logo img{width:200px}
-      .search-wrapper{padding:0 20px}
+
+    header, footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      font-size: 14px;
+      background: #fff;
+      color: #202124;
+    }
+
+    .header-left a, .header-right a, .footer-left a, .footer-right a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #202124;
+    }
+
+    .header-right a.login {
+      color: black;
+      border: 1px solid #1a73e8;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: calc(100vh - 120px);
+    }
+
+    .logo {
+      margin-bottom: 30px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .search-input-container {
+      display: flex;
+      align-items: center;
+      border: 1px solid #dfe1e5;
+      border-radius: 24px;
+      padding: 0 14px;
+      width: 560px;
+    }
+
+    .search-input-container input {
+      flex-grow: 1;
+      padding: 14px 10px;
+      font-size: 16px;
+      border: none;
+      outline: none;
+    }
+
+    .search-input-container img {
+      width: 24px;
+      height: 24px;
+      margin: 0 6px;
+      cursor: pointer;
+    }
+
+    .search-buttons {
+      margin-top: 20px;
+    }
+
+    .search-buttons button {
+      padding: 10px 16px;
+      margin: 5px;
+      font-size: 14px;
+      background-color: #f8f9fa;
+      border: 1px solid #f8f9fa;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .iframe-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: white;
+      flex-direction: column;
+      z-index: 999;
+    }
+
+    .iframe-toolbar {
+      display: none;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px;
+      background-color: #f1f1f1;
+    }
+
+    .iframe-toolbar.active {
+      display: flex;
+    }
+
+    .iframe-toolbar button {
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    iframe {
+      flex-grow: 1;
+      border: none;
+      width: 100%;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #f2f2f2;
     }
   </style>
 </head>
@@ -58,298 +147,139 @@
       <a href="https://store.google.com/">ストア</a>
     </div>
     <div class="header-right">
-      <a href="https://mail.google.com/" target="_blank" rel="noopener noreferrer">Gmail</a>
-      <a href="https://www.google.co.jp/imghp" target="_blank" rel="noopener noreferrer">画像</a>
-
-      <!-- apps button -->
-      <div class="apps-btn" id="appsBtn" title="Google アプリ">
-        <div class="apps-grid">
-          <span></span><span></span><span></span>
-          <span></span><span></span><span></span>
-          <span></span><span></span><span></span>
-        </div>
-      </div>
-
-      <!-- AIモードトグル（見た目） -->
-      <div class="ai-pill" id="aiToggle" title="AIモードを切り替え">AIモード: OFF</div>
-
-      <!-- ログイン -->
-      <a class="login-btn" href="https://accounts.google.com/ServiceLogin" target="_blank" rel="noopener noreferrer">ログイン</a>
+      <a href="https://mail.google.com/">Gmail</a>
+      <a href="https://www.google.co.jp/imghp">画像</a>
+      <a href="https://www.google.co.jp/preferences">設定</a>
+      <a class="login" href="https://accounts.google.com/ServiceLogin">ログイン</a>
+      <a href="https://google.com/a">AIモード</a>
     </div>
   </header>
 
-  <div class="apps-menu" id="appsMenu" aria-hidden="true">
-    <a href="https://maps.google.com/" target="_blank">Maps</a>
-    <a href="https://drive.google.com/" target="_blank">Drive</a>
-    <a href="https://calendar.google.com/" target="_blank">Calendar</a>
-    <a href="https://news.google.com/" target="_blank">News</a>
-    <a href="https://translate.google.com/" target="_blank">Translate</a>
-  </div>
-
-  <main>
+  <div class="main-content" id="mainContent">
     <div class="logo">
       <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
     </div>
-
-    <div class="search-wrapper" id="searchWrapper">
-      <div class="search-box" role="search" aria-label="Google検索">
-        <img id="searchIcon" class="icon-left" src="https://www.gstatic.com/images/icons/material/system/1x/search_gm_grey_24dp.png" alt="検索アイコン" title="検索">
-        <input id="searchInput" type="text" placeholder="Google 検索または URL を入力" autocomplete="off" aria-label="検索入力">
-        <div class="icon-right">
-          <img id="micIcon" src="https://www.gstatic.com/images/branding/googlemic/2x/googlemic_color_24dp.png" alt="音声検索" title="音声検索" />
-          <img id="lensIcon" src="https://bicsim.com/column/uploads/b15f197575365030f5e7ababc798ab95457b7d1e.png" alt="Google Lens" title="Google Lens" />
-        </div>
-      </div>
-
-      <div class="ai-panel" id="aiPanel">
-        <strong>AIモード</strong>
-        <p>（ここにAIの簡易説明やトグル操作のUIを置けます。動作の実装は要追加）</p>
-      </div>
-
-      <div class="search-buttons">
-        <button class="btn" id="btnSearch">Google 検索</button>
-        <button class="btn" id="btnLucky">I'm Feeling Lucky</button>
+    <div class="search-box">
+      <div class="search-input-container">
+        <input type="text" id="searchInput" placeholder="Google 検索または URL を入力" autocomplete="off">
+        <img src="https://www.gstatic.com/images/icons/material/system/1x/search_gm_blue_24dp.png" alt="検索" onclick="handleSearch()">
+        <img src="https://www.gstatic.com/images/icons/material/system/1x/mic_gm_blue_24dp.png" alt="音声" onclick="window.location.href='https://google.com/a'">
+        <img src="https://www.gstatic.com/images/branding/googlelens/1x/google_lens_24dp.png" alt="レンズ" onclick="window.location.href='https://google.com/a'">
+        <img src="https://www.gstatic.com/images/icons/material/system/1x/assistant_gm_blue_24dp.png" alt="AI" onclick="window.location.href='https://google.com/a'">
       </div>
     </div>
-  </main>
+    <div class="search-buttons">
+      <button onclick="handleSearch()">Google 検索</button>
+      <button onclick="window.location.href='https://google.com/a'">I'm Feeling Lucky</button>
+    </div>
+  </div>
 
-  <!-- 隠し iframe 機能 -->
-  <div class="iframe-overlay" id="iframeOverlay">
-    <div class="iframe-toolbar" id="iframeToolbar">
+  <div class="iframe-container" id="iframeContainer">
+    <div class="iframe-toolbar" id="toolbar78">
       <button onclick="loadSite('https://solar.bomberfish.ca/')">Solar OS</button>
       <button onclick="loadSite('https://thickofit.moldeo.org/')">Interstellarプロキシ</button>
       <button onclick="loadSite('https://offcha.com/room/dlKme6WVrCcoPyyoanrT')">避難用Chat</button>
       <button onclick="loadSite('https://chat-u5k5.onrender.com/')">6年Chat</button>
       <button onclick="loadSite('https://light.6nenn.patrickwrede.com/')">自作Interstellar</button>
       <button onclick="loadSite('https://benkyou.ycare.org/')">自作shadowプロキシ</button>
-      <button onclick="closeIframe()">閉じる</button>
+      <button onclick="goBack()">戻る</button>
     </div>
-    <iframe class="iframe-frame" id="hiddenFrame" src=""></iframe>
+    <div class="iframe-toolbar" id="toolbar61">
+      <button onclick="loadSite('https://solar.bomberfish.ca/')">Solar OS</button>
+      <button onclick="loadSite('https://thickofit.moldeo.org/')">Interstellarプロキシ（広告多め）</button>
+      <button onclick="loadSite('https://thickofit.moldeo.org/')">Interstellarプロキシ</button>
+      <button onclick="loadSite('https://offcha.com/room/dlKme6WVrCcoPyyoanrT')">避難用Chat</button>
+      <button onclick="loadSite('https://chat-u5k5.onrender.com/')">6年Chat</button>
+      <button onclick="loadSite('https://light.6nenn.patrickwrede.com/')">自作Interstellarプロキシ（広告多め）</button>
+      <button onclick="loadSite('https://light.6nenn.patrickwrede.com/')">自作Interstellar</button>
+      <button onclick="loadSite('https://benkyou.ycare.org/')">自作shadowプロキシ</button>
+      <button onclick="loadSite('https://six1chat.onrender.com/')">6-1だけchat</button>
+      <button onclick="goBack()">戻る</button>
+    </div>
+    <iframe id="embeddedFrame" src=""></iframe>
   </div>
 
   <footer>
-    <div>
-      <a href="https://about.google/">Googleについて</a>
+    <div class="footer-left"><a href="#">日本</a></div>
+    <div class="footer-right">
       <a href="https://ads.google.com/">広告</a>
-      <a href="https://www.google.com/intl/ja_jp/business/">ビジネス</a>
-    </div>
-    <div>
+      <a href="https://smallbusiness.withgoogle.com/">ビジネス</a>
       <a href="https://www.google.com/search/howsearchworks/">検索の仕組み</a>
       <a href="https://policies.google.com/privacy">プライバシー</a>
-      <a href="https://policies.google.com/terms">利用規約</a>
+      <a href="https://policies.google.com/terms">規約</a>
     </div>
   </footer>
 
   <script>
-  /* -------------------------
-     基本動作（検索・隠し機能など）
-     -------------------------*/
-  const searchInput = document.getElementById('searchInput');
-  const btnSearch = document.getElementById('btnSearch');
-  const btnLucky = document.getElementById('btnLucky');
-  const iframeOverlay = document.getElementById('iframeOverlay');
-  const hiddenFrame = document.getElementById('hiddenFrame');
-  const iframeToolbar = document.getElementById('iframeToolbar');
+    function handleSearch() {
+      const input = document.getElementById("searchInput");
+      const value = input.value.trim();
+      input.value = "";
 
-  function doSearch() {
-    const q = (searchInput.value || "").trim();
-    if (!q) return;
-    if (q === 'roguinn78') {
-      openIframe('https://solar.bomberfish.ca/');
-      return;
-    }
-    if (q === 'roguinn61') {
-      openIframe('https://six1chat.onrender.com/');
-      return;
-    }
-    // 通常のGoogle検索へ（外部遷移）
-    window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(q);
-  }
-  btnSearch.addEventListener('click', doSearch);
-  searchInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') doSearch(); });
-
-  btnLucky.addEventListener('click', () => {
-    // 本家のDoodlesに飛ばす（ダミー）
-    window.location.href = "https://www.google.com/doodles";
-  });
-
-  function openIframe(url) {
-    iframeOverlay.style.display = 'flex';
-    hiddenFrame.src = url;
-    // hide main UI
-    document.querySelector('main').style.display = 'none';
-    document.querySelector('header').style.display = 'none';
-    document.querySelector('footer').style.display = 'none';
-  }
-  function loadSite(url) {
-    hiddenFrame.src = url;
-  }
-  function closeIframe() {
-    hiddenFrame.src = '';
-    iframeOverlay.style.display = 'none';
-    document.querySelector('main').style.display = '';
-    document.querySelector('header').style.display = '';
-    document.querySelector('footer').style.display = '';
-  }
-
-  // 音声 / レンズは動かない機能は google.com/a に遷移（お約束）
-  document.getElementById('micIcon').addEventListener('click', () => { window.location.href = 'https://google.com/a'; });
-  document.getElementById('lensIcon').addEventListener('click', () => { window.location.href = 'https://google.com/a'; });
-  document.getElementById('searchIcon').addEventListener('click', () => { doSearch(); });
-
-  /* -------------------------
-     Apps menu
-     -------------------------*/
-  const appsBtn = document.getElementById('appsBtn');
-  const appsMenu = document.getElementById('appsMenu');
-  appsBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    appsMenu.style.display = appsMenu.style.display === 'block' ? 'none' : 'block';
-  });
-  document.addEventListener('click', () => { appsMenu.style.display = 'none'; });
-
-  /* -------------------------
-     AI mode toggle (UI only)
-     -------------------------*/
-  const aiToggle = document.getElementById('aiToggle');
-  const aiPanel = document.getElementById('aiPanel');
-  let aiOn = false;
-  aiToggle.addEventListener('click', () => {
-    aiOn = !aiOn;
-    aiToggle.textContent = `AIモード: ${aiOn ? 'ON' : 'OFF'}`;
-    aiPanel.style.display = aiOn ? 'block' : 'none';
-  });
-
-  /* -------------------------
-     ランダムURL生成機能（/?があると自動で/?ランダム を連続生成）
-     - 8〜100文字（英数字＋安全な記号）をランダム生成
-     - pushState を使って履歴を埋める
-     - /? が消えたら停止
-     -------------------------*/
-  (function(){
-    const safeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.~!*'();:@&=+$,/";
-    // include brackets [] (URL-safe in many browsers) but you can remove if needed
-    // safeChars += "[]"; // we will include here:
-    const chars = safeChars + "[]";
-
-    function randLen() {
-      return Math.floor(Math.random() * (100 - 8 + 1)) + 8; // 8..100
-    }
-    function randomString(len) {
-      let s = "";
-      for (let i = 0; i < len; i++) {
-        s += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return s;
-    }
-
-    let randomRunning = false;
-    // override pushState/replaceState to dispatch locationchange event
-    (function(){
-      const _push = history.pushState;
-      history.pushState = function(){
-        const ret = _push.apply(this, arguments);
-        window.dispatchEvent(new Event('locationchange'));
-        return ret;
-      };
-      const _replace = history.replaceState;
-      history.replaceState = function(){
-        const ret = _replace.apply(this, arguments);
-        window.dispatchEvent(new Event('locationchange'));
-        return ret;
-      };
-      window.addEventListener('popstate', ()=> window.dispatchEvent(new Event('locationchange')));
-    })();
-
-    function shouldStart() {
-      // start only if on root path and has query part starting with '?'
-      return window.location.pathname === '/' && window.location.search !== '';
-    }
-
-    function startRandomLoopIfNeeded() {
-      if (shouldStart() && !randomRunning) {
-        randomRunning = true;
-        // start generation (first generation)
-        generateAndPush();
+      if (value === "roguinn78") {
+        openIframe("toolbar78", "https://solar.bomberfish.ca/");
+      } else if (value === "roguinn61") {
+        openIframe("toolbar61", "https://six1chat.onrender.com/");
+      } else {
+        window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(value);
       }
     }
 
-    function stopRandomLoop() {
-      randomRunning = false;
+    function openIframe(toolbarId, defaultUrl) {
+      document.getElementById("mainContent").style.display = "none";
+      document.querySelector("header").style.display = "none";
+      document.querySelector("footer").style.display = "none";
+      document.getElementById("iframeContainer").style.display = "flex";
+      document.getElementById("toolbar78").classList.remove("active");
+      document.getElementById("toolbar61").classList.remove("active");
+      document.getElementById(toolbarId).classList.add("active");
+      document.getElementById("embeddedFrame").src = defaultUrl;
     }
 
-    function generateAndPush() {
-      if (!randomRunning) return;
-      // if user removed query -> stop
-      if (window.location.search === '') {
-        stopRandomLoop();
-        return;
-      }
-      const len = randLen();
-      const part = randomString(len);
-      // push new state (do not encode to keep symbols; browsers may percent-encode some automatically)
-      history.pushState({}, "", "/?" + part);
-      // small delay to avoid absolutely tight loop; event-driven will catch locationchange
-      // next generation will be triggered by 'locationchange' listener
+    function loadSite(url) {
+      document.getElementById("embeddedFrame").src = url;
     }
 
-    // when location changes, if randomRunning or should start, keep going
-    window.addEventListener('locationchange', () => {
-      // if query removed -> stop
-      if (window.location.search === '') {
-        stopRandomLoop();
-        return;
-      }
-      // if on root with query -> ensure running and generate next (with slight delay)
-      if (window.location.pathname === '/' && window.location.search !== '') {
-        if (!randomRunning) randomRunning = true;
-        // small safety delay
-        setTimeout(() => {
-          if (randomRunning) generateAndPush();
-        }, 80); // 80ms delay to avoid hogging CPU; adjust if you want faster/slower
+    function goBack() {
+      document.getElementById("iframeContainer").style.display = "none";
+      document.getElementById("mainContent").style.display = "flex";
+      document.querySelector("header").style.display = "flex";
+      document.querySelector("footer").style.display = "flex";
+    }
+
+    // 危機察知機能
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        goBack();
       }
     });
 
-    // start on DOMContentLoaded if condition met
-    window.addEventListener('DOMContentLoaded', startRandomLoopIfNeeded);
-    // also on initial load (in case script executes after)
-    startRandomLoopIfNeeded();
-
-    // stop if user manually navigates to URL without query (monitor periodically)
-    // (this is a lightweight fallback)
-    setInterval(() => {
-      if (randomRunning && window.location.search === '') {
-        stopRandomLoop();
+    // ランダムURL機能
+    function randomString(length) {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:',.<>/?`~";
+      let result = "";
+      for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
       }
-    }, 1000);
-  })();
-
-  /* -------------------------
-     "危機察知"：タブが隠れたら自作ページに戻す（index=ルート）
-     -------------------------*/
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      // 自作サイトのルート（クエリはランダムで付く場合がある）
-      // If you want to always go to plain root, use '/'
-      // We'll navigate to root with random param only if random loop is active,
-      // otherwise plain root.
-      if (location.pathname === '/') {
-        // If random loop active, leave generator to handle re-pushing; otherwise go to root
-        if (!location.search) {
-          // go to root (self)
-          history.pushState({}, "", "/");
-        } else {
-          // if there is search, keep behavior (we will let random generator run)
-          // but ensure main UI is visible on next show by closing iframe
-          closeIframe();
-        }
-      } else {
-        // ensure we go back to root
-        window.location.href = "/";
-      }
+      return result;
     }
-  });
 
+    let randomUrlInterval = null;
+    function startRandomUrl() {
+      if (!window.location.search.startsWith("/?")) return;
+      randomUrlInterval = setInterval(() => {
+        const randomPart = randomString(Math.floor(Math.random() * 93) + 8);
+        window.history.replaceState(null, "", "/?" + randomPart);
+      }, 50);
+    }
+
+    function stopRandomUrl() {
+      clearInterval(randomUrlInterval);
+    }
+
+    if (window.location.search.startsWith("/?")) {
+      startRandomUrl();
+    }
   </script>
 </body>
 </html>
